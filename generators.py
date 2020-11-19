@@ -6,6 +6,10 @@ class BruteForceGenerator:
         self.length = 0
         self.counter = 0
 
+    def reset(self):
+        self.length = 0
+        self.counter = 0
+
     def generate(self):
         password = ''
 
@@ -27,18 +31,30 @@ class BruteForceGenerator:
         return password
 
 
-class PopularPasswordsGenerator:
-    def __init__(self, filename='popular-pawwrods.txt'):
-        self.filename = filename
+class ListGenerator:
+    def __init__(self, tokens):
+        self.tokens = tokens
+        self.counter = 0
 
-        with open(self.filename) as popular_passwords_file:
-            self.popular_passwords = popular_passwords_file.read().split('\n')
-
+    def reset(self):
         self.counter = 0
 
     def generate(self):
-        if self.counter < len(self.popular_passwords):
-            password = self.popular_passwords[self.counter]
+        if self.counter < len(self.tokens):
+            password = self.tokens[self.counter]
             self.counter += 1
             return password
+
+
+class PopularPasswordsGenerator(ListGenerator):
+    def __init__(self, filename='popular-passwords.txt'):
+        with open(filename) as tokens_file:
+            tokens = tokens_file.read().split('\n')
+        super().__init__(tokens=tokens)
+
+
+
+
+
+
 
