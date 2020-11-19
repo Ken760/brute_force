@@ -19,7 +19,7 @@ def good_password_generator(length=10):
     return password
 
 
-with open('10k-most-common.txt') as popular_passwords_file:
+with open('../popular-passwords.txt') as popular_passwords_file:
     popular_passwords = popular_passwords_file.read().split('\n')
 
 counter = 0
